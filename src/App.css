@@ -95,3 +95,7 @@ button{
 .botao-meio{
   text-align: center;
 }
+
+.fundo-lista:hover{
+    cursor: pointer;
+}

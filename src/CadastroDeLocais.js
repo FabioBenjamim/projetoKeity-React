@@ -22,16 +22,32 @@ class Local extends Component {
                             autoComplete="off"
                         />
                     </div>
-                    <div className="col-6">
+                    <div className="col-3">
                         <input onChange={this.props.escutadorDeInput} type="text"
-                            name="horario"
+                            name="HorarioEntrada"
                             className="form-control"
-                            placeholder="Horario de Serviço"
+                            placeholder="Entrada"
                             autoComplete="off"
                         />
                     </div>
-                    <button type="button" onClick={this.props.adicionar} className="btn btn-primary">Adicionar</button>
+                    <div className="col-3">
+                        <input onChange={this.props.escutadorDeInput} type="text"
+                            name="HorarioSaida"
+                            className="form-control"
+                            placeholder="Saida"
+                            autoComplete="off"
+                        />
+                    </div>
+                    <div className="col-6 mt-3">
+                        <input onChange={this.props.escutadorDeInput} type="text"
+                            name="PontoRef"
+                            className="form-control"
+                            placeholder="Ponto de Referencia"
+                            autoComplete="off"
+                        />
+                    </div>
                 </div>
+                <button type="button" onClick={this.props.adicionar} className="btn btn-primary mt-3">Adicionar</button>
             </Fragment>
         );
     }

@@ -4,7 +4,7 @@ import './App.css';
 class App extends Component {
   render () {
     return (
-      <div className="App">
+      <div className="App ml-3 mt-3">
         <header className="App-header">
         </header>
           <form>

@@ -2,16 +2,14 @@ import React, { Fragment, Component } from 'react';
 import './App.css';
 import Agenda from './Agenda';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 //import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 
 class ListaLocal extends Component {
 
   state = {
-    usuario: {
-      email: '',
-      senha: ''
-    }
+
   }
 
 

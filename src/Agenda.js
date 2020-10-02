@@ -9,8 +9,8 @@ const Locais = props => {
 
     const locais = props.agendas.map((local) => {
         return (
-            <tr key={local.id}>
-                <td onClick = { () =>{ props.redirect(local.nome) } } >{local.nome}</td>
+            <tr className="fundo-lista"key={local.id}>
+                <td   onClick = { () =>{ props.redirect(local.nome) } } >{local.nome}</td>
             </tr>
         );
     }
@@ -63,11 +63,13 @@ class Agenda extends Component {
     }
 
     adicionaNovoLocal = () =>{
+        if(this.state.nome != ''){
         const local = { 
             id: this.state.agendas[this.state.agendas.length-1].id +1,
             nome: this.state.nome
          }
         this.setState({ agendas: [...this.state.agendas, local] })
+        }
     }
 
     render() {
