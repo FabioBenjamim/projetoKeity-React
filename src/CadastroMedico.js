@@ -53,8 +53,6 @@ class CadastroMedico extends Component {
             cro: this.state.cro,
             especializacao: this.state.especializacao,
             cpf: this.state.cpf}))
-            .then(res => res.json())
-            .then(res => { console.log(res) })
     }
 
     render() {

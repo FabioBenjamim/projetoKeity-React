@@ -4,14 +4,15 @@ import './App.css'
 import Local from './CadastroDeLocais'
 import { Redirect } from 'react-router-dom';
 import Navbar from './Navbar';
+import ApiService from './ApiService'
 
 
 const Locais = props => {
 
     const locais = props.agendas.map((local) => {
         return (
-            <tr className="fundo-lista"key={local.id}>
-                <td   onClick = { () =>{ props.redirect(local.nome) } } >{local.nome}</td>
+            <tr className="fundo-lista"key={local.idConsultorio}>
+                <td   onClick = { () =>{ props.redirect(local.endereco) } } >{local.nomeConsultorio}</td>
             </tr>
         );
     }
@@ -30,27 +31,33 @@ class Agenda extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            endereco:"",
+            numero: "",
+            pontoReferencia: "",
+            nomeConsultorio: "",
             redirect:false,
             id: '',
             nome:'',
             agendas: [
-                {
-                    id: 1,
-                    nome: 'Barra Funda'
-                },
-                {
-                    id: 2,
-                    nome: 'Penha'
-                },
-                {
-                    id: 3,
-                    nome: 'Vila ré'
-                },
 
-            ]
+            ],
         }
         
     }
+
+    componentDidMount(){
+        var local = [
+          { 
+            nome:"arroz"
+          },
+          {
+            nome:"feijao"
+          }
+        ]
+        ApiService.buscaMedico()
+        .then(res => res.json())
+        .then(res => { this.setState( { agendas: [...this.state.agendas, ...res.consultorios] } )  })
+      }
 
     redirect = nome =>{ 
         this.setState( { redirect: true, path:'/Agenda', loca:nome } )
@@ -64,13 +71,7 @@ class Agenda extends Component {
     }
 
     adicionaNovoLocal = () =>{
-        if(this.state.nome !== ''){
-        const local = { 
-            id: this.state.agendas[this.state.agendas.length-1].id +1,
-            nome: this.state.nome
-         }
-        this.setState({ agendas: [...this.state.agendas, local] })
-        }
+        
     }
 
     render() {
