@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import './App.css';
 import Agenda from './Agenda';
+import Navbar from './Navbar'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -16,6 +17,7 @@ class ListaLocal extends Component {
   render() {
     return (
       <Fragment>
+        <Navbar />
         <div className="row">
           <div className="col-6">
             <table className="table agenda-meio">

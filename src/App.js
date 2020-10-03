@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import './App.css';
 import ApiService from './ApiService';
+import Navbar from './Navbar'
 
 class App extends Component {
 
@@ -31,13 +32,30 @@ class App extends Component {
     }
 
     cadastraPaciente = () =>{
-        ApiService.cadastraPaciente(JSON.stringify(this.state))
+        console.log(JSON.stringify({
+            nome: this.state.nome,
+            sobrenome: this.state.sobrenome,
+            rg: this.state.rg,
+            cpf: this.state.cpf,
+            sexo: this.state.sexo,
+            email: this.state.email,
+            telefone: this.state.telefone,
+            cep: this.state.cep,
+            endereco: this.state.rua,
+            numero: this.state.numero,
+            complemento: this.state.complemento,
+            cidade: this.state.cidade,
+            estado: this.state.estado
+        }))
         .then(res => res.json())
-        .then(res => console.log(res))
+        .then(res => { console.log(res)})
+
     }
 
   render () {
     return (
+        <Fragment>
+        <Navbar />
       <div className="App ml-3 mt-3">
         <header className="App-header">
         </header>
@@ -134,6 +152,7 @@ class App extends Component {
     </form>
     <button onClick={ this.cadastraPaciente } >Enviar </button>
   </div>
+  </Fragment>
     );
   }
 }

@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import Local from './CadastroDeLocais'
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import Navbar from './Navbar';
 
 
 const Locais = props => {
@@ -52,7 +53,7 @@ class Agenda extends Component {
     }
 
     redirect = nome =>{ 
-        this.setState( { redirect: true, path:'/Agenda'} )
+        this.setState( { redirect: true, path:'/Agenda', loca:nome } )
      }
 
     escutadorDeInput = event => {
@@ -63,7 +64,7 @@ class Agenda extends Component {
     }
 
     adicionaNovoLocal = () =>{
-        if(this.state.nome != ''){
+        if(this.state.nome !== ''){
         const local = { 
             id: this.state.agendas[this.state.agendas.length-1].id +1,
             nome: this.state.nome
@@ -77,6 +78,9 @@ class Agenda extends Component {
             this.setState( { redirect: false } )
             return <Redirect to={{
               pathname: this.state.path,
+              state: {
+                  local: this.state.loca
+              }
 
             }} />
           } else
