@@ -47,9 +47,6 @@ class App extends Component {
             cidade: this.state.cidade,
             estado: this.state.estado
         }))
-        .then(res => res.json())
-        .then(res => { console.log(res)})
-
     }
 
   render () {
