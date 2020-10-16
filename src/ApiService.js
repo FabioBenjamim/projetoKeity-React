@@ -15,6 +15,38 @@ const ApiService = {
         })
       },
 
+      ConfiguraAgendas: body =>{
+        return fetch('http://localhost:8080/agendas', {
+          method: 'PUT',
+          headers: { 'content-type': 'application/json' },
+          body: body
+        })
+      },
+
+      criaAgenda: ( idConsultorio, idMedico ) =>{
+        var formData = new FormData;
+        formData.append("idConsultorio",idConsultorio);
+        formData.append("idMedico", idMedico);
+        var requestOptions = {
+          method: 'PUT',
+          body: formData,
+          redirect: 'follow'
+        };
+        return fetch("http://localhost:8080/consultorios/agenda", requestOptions)
+      },
+
+      BuscaidAgenda: id =>{
+        return fetch('http://localhost:8080/medicos/'+ `${id}`, {
+          method: 'GET',
+        })
+      },
+
+      HoraLivreMedico: () =>{
+        return fetch('http://localhost:8080/horarios/1', {
+          method: 'GET',
+        })
+      },
+
       buscaMedico: () => {
         var formData = new FormData;
         formData.append("idMedico", "1");

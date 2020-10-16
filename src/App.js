@@ -32,7 +32,7 @@ class App extends Component {
     }
 
     cadastraPaciente = () =>{
-        console.log(JSON.stringify({
+        ApiService.cadastraPaciente(JSON.stringify({
             nome: this.state.nome,
             sobrenome: this.state.sobrenome,
             rg: this.state.rg,

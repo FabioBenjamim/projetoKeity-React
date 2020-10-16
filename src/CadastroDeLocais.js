@@ -26,6 +26,31 @@ class Local extends Component {
                 }
             ]
         } ))
+        .then(res => {
+                ApiService.BuscaidAgenda(1)
+                .then(response => response.text())
+                .then(result => {
+                    ApiService.criaAgenda(1, 1)
+                    .then(res =>{
+                        ApiService.ConfiguraAgendas(JSON.stringify({
+                            idAgenda: 1,
+                            nomePaciente: "tamburu",
+                            semana: {
+                                diaDaSemana: this.state.DiaSemana,
+                                inicioExpediente: this.state.HoraEntrada,
+                                fimExpediente: this.state.HoraSaida,
+                                nomeEscritorio: "XXX"
+                            }
+                        }))
+                        .then(res =>{
+                            if(res.ok){
+                                console.log("deu certo primo")
+                            }
+                        }) 
+                    })
+                 
+            })
+        })
       }
 
       escutadorDeInput = event => {
@@ -68,6 +93,30 @@ class Local extends Component {
                             name="nomeConsultorio"
                             className="form-control"
                             placeholder="Nome Consultorio"
+                            autoComplete="off"
+                        />
+                    </div>
+                    <div className="col-6 mt-3">
+                        <input onChange={this.escutadorDeInput} type="text"
+                            name="DiaSemana"
+                            className="form-control"
+                            placeholder="Dia da semana"
+                            autoComplete="off"
+                        />
+                    </div>
+                    <div className="col-3 mt-3">
+                        <input onChange={this.escutadorDeInput} type="text"
+                            name="HoraEntrada"
+                            className="form-control"
+                            placeholder="Entrada"
+                            autoComplete="off"
+                        />
+                        </div>
+                        <div className="col-3 mt-3">
+                        <input onChange={this.escutadorDeInput} type="text"
+                            name="HoraSaida"
+                            className="form-control"
+                            placeholder="Saida"
                             autoComplete="off"
                         />
                     </div>

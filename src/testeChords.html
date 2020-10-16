@@ -1,0 +1,31 @@
+<html>
+    <input id="lat"></input>
+    <input id="lng"></input>
+    <button id="btn" >Testar Chords</button>
+    <p id="resposta">F</p>  
+    </html>
+<script>
+
+    function toRadians(grau){
+        var pi = Math.PI
+        return grau * (pi/180)
+    }
+
+    const button = document.querySelector("#btn")
+    button.addEventListener("click", CalculaDist)
+    function CalculaDist(){
+        var lat = document.querySelector("#lat").value
+        console.log(lat)
+        var lng = document.querySelector("#lng").value
+        console.log(lng)
+        var dist = 6371 * Math.acos(Math.cos(toRadians( -23.526) ) * 
+            Math.cos(toRadians( -23.5489)) *
+            Math.cos( toRadians(  -46.344 ) - toRadians( -46.6388 ) ) + 
+            Math.sin( toRadians(  -23.526 ) ) *
+            Math.sin( toRadians( -23.5489 ) )
+            
+        )
+        console.log(dist)
+        
+    }
+</script>

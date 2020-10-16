@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CadastroMedico from './CadastroMedico';
 import Listalocais from './ListaLocal';
 import AgendaLocal from './AgendaLocal';
+import ListaDeHorariosLivre from './ListaDeHorariosLivre'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Route path="/CadastroMedico" exact={true} component={CadastroMedico} />
       <Route path="/Listalocais" exact={true} component={Listalocais} />
       <Route path="/Agenda" exact={true} component={AgendaLocal} />
+      <Route path="/X" exact={true} component={ListaDeHorariosLivre} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')
