@@ -8,8 +8,8 @@ const CorpoListaLivre = props =>{
     const horarios = props.livres.map((hora) =>{
         return(
             <tr key={hora.horario}>
-                <td onClick={ () =>{ console.log(ApiService.EscolheHorario(hora.idHorario, props.nome)) } } > { hora.horario } </td>
-                <td> { hora.status } </td>
+                <td > { hora.horario } </td>
+                <td> { hora.nomePaciente } </td>
             </tr>
         );
     })
@@ -47,11 +47,11 @@ class ListaDeHorariosLivre extends Component{
                             <thead>
                                 <tr>
                                     <th>Horario</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Paciente</th>
                                 </tr>
                             </thead>
-                            <CorpoListaLivre livres = { this.state.livre } nome={ this.props.location.state.nome }/>
-                            <button onClick={ () =>{ console.log(this.props.location.state) } } ></button>
+                            <CorpoListaLivre livres = { this.state.livre } />
+                            <button onClick={ () =>{ console.log(this.state.livre) } } ></button>
                         </table>
                     </div>
                 </div>

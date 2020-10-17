@@ -16,7 +16,7 @@ class Local extends Component {
 
     cadastraConsultorio = body =>{
        ApiService.criaConsultorio(JSON.stringify( {
-            idMedico: 1,
+            idMedico: this.props.idMedico,
             consultorios:[
                 {
                     endereco: this.state.endereco,
@@ -27,14 +27,16 @@ class Local extends Component {
             ]
         } ))
         .then(res => {
-                ApiService.BuscaidAgenda(1)
+                ApiService.BuscaidAgenda(this.props.idMedico)
                 .then(response => response.text())
                 .then(result => {
-                    ApiService.criaAgenda(1, 1)
+                    var idConsultorio = JSON.parse(result).consultorios.length 
+                    var idMedico = JSON.parse(result).idMedico
+                    ApiService.criaAgenda(idConsultorio, idMedico)
                     .then(res =>{
                         ApiService.ConfiguraAgendas(JSON.stringify({
-                            idAgenda: 1,
-                            nomePaciente: "tamburu",
+                            idAgenda: idConsultorio,
+                            nomePaciente: "Livre",
                             semana: {
                                 diaDaSemana: this.state.DiaSemana,
                                 inicioExpediente: this.state.HoraEntrada,

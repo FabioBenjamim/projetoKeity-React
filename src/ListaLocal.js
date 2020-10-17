@@ -41,7 +41,7 @@ constructor(props){
                   <th scope="col">Local</th>
                 </tr>
               </thead>
-              <Agenda   filhos = { this.state.filhos } cadastraConsultorio={ this.cadastraConsultorio }/>
+              <Agenda   idMedico={ this.props.location.state.idMedico } filhos = { this.state.filhos } cadastraConsultorio={ this.cadastraConsultorio }/>
             </table>
           </div>
         </div>

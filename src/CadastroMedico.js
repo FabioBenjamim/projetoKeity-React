@@ -48,11 +48,12 @@ class CadastroMedico extends Component {
             complemento: this.state.complemento,
             cidade: this.state.cidade,
             estado: this.state.estado,
-            rg: this.state.rg,
             cri: this.state.cri,
             cro: this.state.cro,
             especializacao: this.state.especializacao,
-            cpf: this.state.cpf}))
+            cpf: this.state.cpf,
+            senha: this.state.cri,
+        }))
     }
 
     render() {

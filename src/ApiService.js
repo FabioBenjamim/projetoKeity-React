@@ -35,21 +35,73 @@ const ApiService = {
         return fetch("http://localhost:8080/consultorios/agenda", requestOptions)
       },
 
+      EscolheHorario: (idHorario, nomePaciente) =>{
+        return fetch("http://localhost:8080/horarios/"+`${idHorario}`+'/'+`${nomePaciente}`,{
+          method: "PUT"
+        })
+      },
+
       BuscaidAgenda: id =>{
         return fetch('http://localhost:8080/medicos/'+ `${id}`, {
           method: 'GET',
         })
       },
 
-      HoraLivreMedico: () =>{
-        return fetch('http://localhost:8080/horarios/1', {
-          method: 'GET',
+      buscaConsultorios: () =>{
+        return fetch('http://localhost:8080/consultorios', {
+          method:'GET'
         })
       },
 
-      buscaMedico: () => {
+      Login: body =>{
+        return fetch('http://localhost:8080/pacientes/autentica',{
+        method:'POST',
+        headers: { 'content-type': 'application/json' },
+        body: body
+      })
+      },
+
+      LoginMedico: body =>{
+        return fetch('http://localhost:8080/medicos/autentica',{
+        method:'POST',
+        headers: { 'content-type': 'application/json' },
+        body: body
+      })
+      },
+
+      HoraLivreMedico: (id) =>{
+        return fetch('http://localhost:8080/horarios/'+ `${id}`, {
+          method: 'GET',
+        })
+      },
+      
+      paciente:(cpf) =>{
         var formData = new FormData;
-        formData.append("idMedico", "1");
+        formData.append("cpf", cpf)
+        var requestOptions = {
+          method: 'POST',
+          body: formData,
+          redirect: 'follow'
+        };
+        return fetch("http://localhost:8080/pacientes/paciente1", requestOptions)
+      },
+
+
+      
+      medico:(cpf) =>{
+        var formData = new FormData;
+        formData.append("cpf", cpf)
+        var requestOptions = {
+          method: 'POST',
+          body: formData,
+          redirect: 'follow'
+        };
+        return fetch("http://localhost:8080/medicos/medico1", requestOptions)
+      },
+
+      buscaMedico: (id) => {
+        var formData = new FormData;
+        formData.append("idMedico", id);
         var requestOptions = {
           method: 'POST',
           body: formData,

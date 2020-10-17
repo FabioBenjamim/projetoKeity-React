@@ -12,7 +12,7 @@ const Locais = props => {
     const locais = props.agendas.map((local) => {
         return (
             <tr className="fundo-lista"key={local.idConsultorio}>
-                <td   onClick = { () =>{ props.redirect(local.endereco) } } >{local.nomeConsultorio}</td>
+                <td   onClick = { () =>{ props.redirect(local.endereco, local.idConsultorio) } } >{local.nomeConsultorio}</td>
             </tr>
         );
     }
@@ -46,6 +46,7 @@ class Agenda extends Component {
     }
 
     componentDidMount(){
+        console.log(this.props.idMedico)
         var local = [
           { 
             nome:"arroz"
@@ -54,13 +55,13 @@ class Agenda extends Component {
             nome:"feijao"
           }
         ]
-        ApiService.buscaMedico()
+        ApiService.buscaMedico(this.props.idMedico)
         .then(res => res.json())
         .then(res => { this.setState( { agendas: [...this.state.agendas, ...res.consultorios] } )  })
       }
 
-    redirect = nome =>{ 
-        this.setState( { redirect: true, path:'/Agenda', loca:nome } )
+    redirect = (nome,idConsultorio) =>{ 
+        this.setState( { redirect: true, path:'/Agenda', loca:nome, id:idConsultorio } )
      }
 
     escutadorDeInput = event => {
@@ -80,7 +81,8 @@ class Agenda extends Component {
             return <Redirect to={{
               pathname: this.state.path,
               state: {
-                  local: this.state.loca
+                  local: this.state.loca,
+                  idConsultorio:  this.state.id
               }
 
             }} />
@@ -88,7 +90,7 @@ class Agenda extends Component {
         return (
             <Fragment>
                 <Locais agendas={this.state.agendas} redirect = { this.redirect }/>
-                <Local  escutadorDeInput = { this.escutadorDeInput } adicionar = { this.adicionaNovoLocal }/>
+                <Local  idMedico={ this.props.idMedico }escutadorDeInput = { this.escutadorDeInput } adicionar = { this.adicionaNovoLocal }/>
             </Fragment>
         );
     }

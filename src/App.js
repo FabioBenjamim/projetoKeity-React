@@ -45,7 +45,8 @@ class App extends Component {
             numero: this.state.numero,
             complemento: this.state.complemento,
             cidade: this.state.cidade,
-            estado: this.state.estado
+            estado: this.state.estado,
+            senha: this.state.rg
         }))
     }
 

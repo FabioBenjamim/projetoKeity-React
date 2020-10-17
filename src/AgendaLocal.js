@@ -4,12 +4,19 @@ import Local from './CadastroDeLocais'
 import { Link, Redirect } from 'react-router-dom';
 import AgendaLocalCorpo from './AgendaLocalCorpo';
 import Navbar from './Navbar';
+import ApiService from './ApiService';
 
 class AgendaLocal extends Component {
     constructor(props) {
         super(props);
         this.state = {
         }
+    }
+
+    componentDidMount(){
+        ApiService.HoraLivreMedico(4)
+        .then(res => res.text())
+        .then(result =>{ console.log(JSON.parse(result)) })
     }
 
     render() {
