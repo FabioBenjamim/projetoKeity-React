@@ -7,6 +7,7 @@ class Login extends Component {
     constructor(props){
         super(props);
         this.state={
+          idPaciente: 0,
             redirect:false,
             cpf:"",
             senha:""
@@ -27,8 +28,10 @@ class Login extends Component {
             if(result === "true")
                 ApiService.paciente(this.state.cpf)
                 .then(res => res.text())
-                .then(result =>{ const nomes = JSON.parse(result).nome
-                this.setState( { redirect: true, nome: nomes } ) })
+                .then(result =>{  const idPacientes = JSON.parse(result).idPaciente; 
+                  const nomes = JSON.parse(result).nome
+                this.setState( { redirect: true, nome: nomes, idPaciente : idPacientes  } )
+              console.log(this.state) })
         })
     }
 
@@ -36,9 +39,10 @@ class Login extends Component {
     if (this.state.redirect) {
         this.setState( { redirect: false } )
         return <Redirect to={{
-          pathname: '/ClinicasP',
+          pathname: '/HomePaciente',
           state: {
-            nome: this.state.nome
+            nome: this.state.nome,
+            idPaciente: this.state.idPaciente
           }
 
         }} />

@@ -22,7 +22,9 @@ class Local extends Component {
                     endereco: this.state.endereco,
                     numero: this.state.numero,
                     pontoReferencia: this.state.pontoReferencia,
-                    nomeConsultorio: this.state.nomeConsultorio
+                    nomeConsultorio: this.state.nomeConsultorio,
+                    lat: this.state.lat,
+                    lng: this.state.lng
                 }
             ]
         } ))
@@ -46,7 +48,7 @@ class Local extends Component {
                         }))
                         .then(res =>{
                             if(res.ok){
-                                console.log("deu certo primo")
+                                console.log("Deu certo primo")
                             }
                         }) 
                     })
@@ -119,6 +121,22 @@ class Local extends Component {
                             name="HoraSaida"
                             className="form-control"
                             placeholder="Saida"
+                            autoComplete="off"
+                        />
+                    </div>
+                    <div className="col-3 mt-3">
+                        <input onChange={this.escutadorDeInput} type="text"
+                            name="lat"
+                            className="form-control"
+                            placeholder="Latitude"
+                            autoComplete="off"
+                        />
+                    </div>
+                    <div className="col-3 mt-3">
+                        <input onChange={this.escutadorDeInput} type="text"
+                            name="lng"
+                            className="form-control"
+                            placeholder="longitude"
                             autoComplete="off"
                         />
                     </div>

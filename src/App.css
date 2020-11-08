@@ -89,8 +89,14 @@ button{
 .agenda-meio{
   text-align: center;
   margin-left: 50%;
-  margin-top: 10%;
+  margin-top: 5%;
 }
+.agenda-meio1{
+    text-align: center;
+    margin-left: 50%;
+    margin-top: 5%;
+  }
+  
 
 .botao-meio{
   text-align: center;
@@ -98,4 +104,32 @@ button{
 
 .fundo-lista:hover{
     cursor: pointer;
+}
+
+.rangeKm{
+    margin-left: 50%;
+}
+
+.Home{
+    background-image: url('./images/x.jpg');
+}
+
+.Medicos{
+    background-image: url('./images/medicos.jpg');
+}
+
+.apresentação{
+    margin-left: auto;
+}
+
+.texto-apresentacao{
+    color: white;
+}
+
+.texto-apresentacao1{
+    color: black;
+}
+
+.login-cadastro{
+    margin-left: 25%;
 }

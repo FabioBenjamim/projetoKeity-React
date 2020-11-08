@@ -1,20 +1,25 @@
 import React, { Component, Fragment } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import 'bootstrap/dist/js/bootstrap.js';
-import $ from 'jquery';
-import Popper from 'popper.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css'
+import Local from './CadastroDeLocais'
+import { Redirect,Link } from 'react-router-dom';
+import Navbar from './Navbar';
+import ApiService from './ApiService'
 
-
-class Navbar extends Component {
-    constructor(props) {
+class HomeMedico extends Component{
+    constructor(props){
         super(props);
-        this.state = {
-            visible: "disabled"
+        this.state={
+
         }
     }
 
-    render() {
-        return (
+    componentDidMount(){
+        console.log(this.props.location.state.idMedico)
+    }
+
+    render(){
+        return(
             <Fragment>
                 <div className="">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,10 +29,19 @@ class Navbar extends Component {
                         </button>
                         <div class="collapse navbar-collapse" id="textoNavbar">
                             <ul class="navbar-nav mr-auto">
+                                <li className="nav-item">
+                                <Link className="nav-link" to={{
+                                        pathname: '/Listalocais',
+                                        state: { idMedico: this.props.location.state.idMedico }
+
+                                    }}>
+                                        Agendas
+                                    </Link>
+                                </li>
                             </ul>
                             <ul className="navbar-nav ml-auto mr-5">
                                 <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{}</a>
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dr.Naruto</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#"><Link className="nav-link" to={{
                                         pathname: '/Login',
@@ -37,13 +51,6 @@ class Navbar extends Component {
                                     </Link></a>
                                         <a class="dropdown-item" href="#"><Link className="nav-link" to={{
                                         pathname: '/LoginMedico',
-
-                                    }}>
-                                        Médico
-                                    </Link></a>
-                                    <div class="dropdown-divider"></div>
-                                    <a disabled class="dropdown-item" href="#"><Link className="nav-link" to={{
-                                        pathname: '/',
 
                                     }}>
                                         Sair
@@ -57,5 +64,5 @@ class Navbar extends Component {
             </Fragment>
         );
     }
-
-} export default Navbar;
+}
+export default HomeMedico;

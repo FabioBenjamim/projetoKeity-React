@@ -35,8 +35,8 @@ const ApiService = {
         return fetch("http://localhost:8080/consultorios/agenda", requestOptions)
       },
 
-      EscolheHorario: (idHorario, nomePaciente) =>{
-        return fetch("http://localhost:8080/horarios/"+`${idHorario}`+'/'+`${nomePaciente}`,{
+      EscolheHorario: (idHorario, nomePaciente, idPaciente) =>{
+        return fetch("http://localhost:8080/horarios/"+`${idHorario}`+'/'+`${nomePaciente}`+'/'+`${idPaciente}`,{
           method: "PUT"
         })
       },
@@ -87,6 +87,9 @@ const ApiService = {
       },
 
 
+      pegaConsultas: (idPaciente)=>{
+        return fetch('http://localhost:8080/horarios/paciente/'+ `${idPaciente}`)
+      },
       
       medico:(cpf) =>{
         var formData = new FormData;

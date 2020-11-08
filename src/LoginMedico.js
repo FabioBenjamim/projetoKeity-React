@@ -27,8 +27,8 @@ class LoginMedico extends Component {
             if(result === "true")
                 ApiService.medico(this.state.cpf)
                 .then(res => res.text())
-                .then(result =>{  const id = JSON.parse(result).idMedico
-                                    this.setState({ idMedico: id, redirect:true }) })
+                .then(result =>{  const id = JSON.parse(result).idMedico; const nomes = JSON.parse(result).nome
+                                    this.setState({ nome: nomes, idMedico: id, redirect:true }) })
         })
     }
 
@@ -38,7 +38,8 @@ class LoginMedico extends Component {
         return <Redirect to={{
           pathname: '/ListaLocais',
           state: {
-            idMedico: this.state.idMedico
+            idMedico: this.state.idMedico,
+            nome: this.state.nome
           }
 
         }} />

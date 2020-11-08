@@ -82,7 +82,8 @@ class Agenda extends Component {
               pathname: this.state.path,
               state: {
                   local: this.state.loca,
-                  idConsultorio:  this.state.id
+                  idConsultorio:  this.state.id,
+                  idMedico: this.props.idMedico
               }
 
             }} />
