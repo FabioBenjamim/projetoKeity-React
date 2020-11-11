@@ -20,8 +20,7 @@ const Locais = props => {
             Math.sin(toRadians(-23.526)) *
             Math.sin(toRadians(local.lat))
         )
-        console.log(local)
-        if (props.range >= dist && props.especialidade == "todas")
+        if (props.range >= dist)
             return (
                 <tr className="fundo-lista" key={local.idConsultorio}>
                     <td onClick={() => { props.redirect(local.endereco, local.idConsultorio) }} >{local.nomeConsultorio}</td>
@@ -46,7 +45,8 @@ class ListaClinicaPaciente extends Component {
             range: 0,
             clinicas: [],
             redirect: false,
-            especialidade: "todas"
+            especialidade: "todas",
+            medicosEspecialidade: []
         }
     }
     componentDidMount(){
@@ -61,7 +61,20 @@ class ListaClinicaPaciente extends Component {
         this.setState({ redirect: true, path: '/X', id: idConsultorio, nome: this.props.location.state.nome, idPaciente: this.props.location.state.idPaciente })
     }
 
-    escutadorDeInput = event => {
+    buscaPorEspecialização = (event) =>{
+        this.escutadorDeInput(event)
+        this.setState({ clinicas: [] })
+        this.setState({ medicosEspecialidade: [] })
+        ApiService.BuscaPorEspecializade(this.state.especialidade)
+        .then(response => response.json())
+        .then(res => {
+            res.map((x) =>{
+                this.setState( { clinicas: [ ...this.state.clinicas, ...x.consultorios ] } )
+            })
+        })
+    }
+
+    escutadorDeInput = (event) => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -84,26 +97,26 @@ class ListaClinicaPaciente extends Component {
             return (
                 <Fragment>
                     <div className="">
-                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                            <a class="navbar-brand" href="#">MySchedule</a>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#textoNavbar" aria-controls="textoNavbar" aria-expanded="false" aria-label="Alterna navegação">
-                                <span class="navbar-toggler-icon"></span>
+                        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                            <a className="navbar-brand" href="#">MySchedule</a>
+                            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#textoNavbar" aria-controls="textoNavbar" aria-expanded="false" aria-label="Alterna navegação">
+                                <span className="navbar-toggler-icon"></span>
                             </button>
-                            <div class="collapse navbar-collapse" id="textoNavbar">
-                                <ul class="navbar-nav mr-auto">
+                            <div className="collapse navbar-collapse" id="textoNavbar">
+                                <ul className="navbar-nav mr-auto">
                                 </ul>
                                 <ul className="navbar-nav ml-auto mr-5">
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Bem Vindo(a): { this.props.location.state.nome }</a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#"><Link className="nav-link" to={{
+                                    <li className="nav-item dropdown">
+                                        <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Bem Vindo(a): { this.props.location.state.nome }</a>
+                                        <div className="dropdown-menu">
+                                            <a className="dropdown-item" href="#"><Link className="nav-link" to={{
                                                 pathname: '/Login',
 
                                             }}>
                                                 Paciente
                                     </Link></a>
-                                            <div class="dropdown-divider"></div>
-                                            <a disabled class="dropdown-item" href="#"><Link className="nav-link" to={{
+                                            <div className="dropdown-divider"></div>
+                                            <a disabled className="dropdown-item" href="#"><Link className="nav-link" to={{
                                                 pathname: '/',
 
                                             }}>
@@ -121,9 +134,11 @@ class ListaClinicaPaciente extends Component {
                                 <label for="formControlRange">distancia: {this.state.range} Km</label>
                                 <input name="range" onChange={this.escutadorDeInput} type="range" value={this.state.range} min="0" step="0.5" max="100" class="form-control-range" ></input>
                                 <label className="mt-1" for="formControlRange">Especialidade: </label>
-                                <select onChange={this.escutadorDeInput} name="estado" id="estado">
-                                    <option value="Todas">Todas</option>
+                                <select onClick={ this.escutadorDeInput } name="especialidade" id="estado">
+                                    <option value="ser protagonista">Todas</option>
+                                    <option value="oftalmo">oftalmo</option>
                                 </select>
+                                <button onClick={ this.buscaPorEspecialização }>Confirmar</button>
                             </div>
                             <table className="table agenda-meio">
                                 <thead>

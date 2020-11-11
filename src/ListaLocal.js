@@ -12,23 +12,15 @@ class ListaLocal extends Component {
 constructor(props){
   super(props);
   this.state = {
-    filhos: [
-      {
-          agenda:[],
-          id: 1,
-          nome: 'Barra Funda'
-      },
-      {
-          id: 2,
-          nome: 'Penha'
-      },
-      {
-          id: 3,
-          nome: 'Vila ré'
-      }
-  ]
+      data: ""
   }
 }
+
+  componentDidMount(){
+    ApiService.lastLogin(this.props.location.state.idMedico)
+    .then(res => res.json())
+    .then(res => this.setState( { data: res[res.length-1].data.substring(0,10).replaceAll("-", "/") } ))
+  }
 
   render() {
     return (
@@ -44,7 +36,7 @@ constructor(props){
                             </ul>
                             <ul className="navbar-nav ml-auto mr-5">
                                 <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{this.props.location.state.nome}</a>
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{this.props.location.state.nome}</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#"><Link className="nav-link" to={{
                                         pathname: '/Login',
@@ -67,6 +59,7 @@ constructor(props){
                                     </Link></a>
                                     </div>
                                 </li>
+                                  <a className="nav-item nav-link disabled">Ultimo login: { this.state.data }</a>
                             </ul>
                         </div>
                     </nav>

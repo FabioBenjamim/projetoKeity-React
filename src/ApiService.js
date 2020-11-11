@@ -41,8 +41,19 @@ const ApiService = {
         })
       },
 
+      lastLogin: id =>{
+        return fetch('http://localhost:8080/lastLogin/'+ `${id}`, {
+          method: 'GET',
+        })
+      },
+
       BuscaidAgenda: id =>{
         return fetch('http://localhost:8080/medicos/'+ `${id}`, {
+          method: 'GET',
+        })
+      },
+      BuscaPorEspecializade: especializacao =>{
+        return fetch('http://localhost:8080/medicos/buscaMedico/'+ `${especializacao}`, {
           method: 'GET',
         })
       },
