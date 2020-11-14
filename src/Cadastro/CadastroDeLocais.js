@@ -46,7 +46,7 @@ class Local extends Component {
   render() {
     return (
       <Fragment>
-        <div className="row mt-5">
+        <div className="row">
           <div className="col-6">
             <input
               onChange={this.escutadorDeInput}
@@ -107,19 +107,6 @@ class Local extends Component {
               placeholder="longitude"
               autoComplete="off"
             />
-          </div>
-          <div class="form-group row">
-            <label for="example-date-input" class="col-2 col-form-label">
-              Date
-            </label>
-            <div class="col-10">
-              <input
-                class="form-control"
-                type="date"
-                min="09:00"
-                max="18:00"
-              ></input>
-            </div>
           </div>
         </div>
         <button

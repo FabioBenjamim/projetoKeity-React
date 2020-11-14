@@ -11,6 +11,7 @@ const CorpoListaLivre = (props) => {
       <tr key={hora.horario}>
         <td> {hora.horario} </td>
         <td> {hora.status} </td>
+        <td> {hora.nomePaciente} </td>
       </tr>
     );
   });
@@ -115,6 +116,7 @@ class ListaDeHorariosLivreMedicoZ extends Component {
                 <tr>
                   <th>Horario</th>
                   <th scope="col">Status</th>
+                  <th scope="col">Paciente</th>
                 </tr>
               </thead>
               <CorpoListaLivre

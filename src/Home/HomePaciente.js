@@ -11,7 +11,7 @@ const CorpoListaLivre = (props) => {
     return (
       <tr key={hora.horario}>
         <td> {hora.horario} </td>
-        <td> {hora.jornada.diaDaSemana} </td>
+        <td> {hora.jornada.dia} </td>
       </tr>
     );
   });
@@ -41,8 +41,8 @@ class HomePaciente extends Component {
   render() {
     return (
       <Fragment>
-        <div className="">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="home-Paciente-Color">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5 home-Paciente-Color">
             <a class="navbar-brand" href="#">
               MySchedule
             </a>
@@ -112,57 +112,48 @@ class HomePaciente extends Component {
               </ul>
             </div>
           </nav>
-        </div>
-        <div className="row">
-          <div className="col-6">
-            <div className="agenda-meio1">
-              <table className="table agenda-meio fundo-lista">
-                <thead>
-                  <tr>
-                    <th>Proxima Consulta</th>
-                  </tr>
-                </thead>
-              </table>
+          <div className="home-Paciente">
+            <div className="col-md-7 col-md-offset-3" style={{ textAlign: "center", float: "none", margin: " 0 auto", backgroundcolor: "#C7EBFC" }}>
+              <div class="card bg-light ">
+                <div class="card-header">Proxima Consulta</div>
+                <div class="card-body">
+                  <div className="row">
+                    <div className="col-6">
+                      <table className="table agenda-meio fundo-lista">
+                        <thead>
+                          <tr>
+                            <th>Horario</th>
+                            <th>Dia</th>
+                          </tr>
+                        </thead>
+                        <CorpoListaLivre livres={this.state.consultas} />
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-6">
-            <table className="table agenda-meio fundo-lista">
-              <thead>
-                <tr>
-                  <th>Horario</th>
-                  <th>Dia</th>
-                </tr>
-              </thead>
-              <CorpoListaLivre livres={this.state.consultas} />
-            </table>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-6">
-            <div className="agenda-meio1">
-              <table className="table agenda-meio fundo-lista">
-                <thead>
-                  <tr>
-                    <th>Retornos de Consulta</th>
-                  </tr>
-                </thead>
-              </table>
+            <div className="col-md-7 col-md-offset-3" style={{ textAlign: "center", float: "none", margin: " 0 auto" }}>
+              <div class="card bg-light mt-5">
+                <div class="card-header">Retornos de Consulta</div>
+                <div class="card-body">
+                  <div className="row">
+                  </div>
+                  <div className="row">
+                    <div className="col-6">
+                      <table className="table agenda-meio fundo-lista">
+                        <thead>
+                          <tr>
+                            <th>Horario</th>
+                            <th>Dia</th>
+                          </tr>
+                        </thead>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-6">
-            <table className="table agenda-meio fundo-lista">
-              <thead>
-                <tr>
-                  <th>Horario</th>
-                  <th>Dia</th>
-                </tr>
-              </thead>
-            </table>
           </div>
         </div>
       </Fragment>

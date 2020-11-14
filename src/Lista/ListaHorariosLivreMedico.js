@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
+import './ListaHorariosLivreMedico.css'
 import { Link, Redirect } from "react-router-dom";
 import ApiService from "../Service/ApiService";
 import Navbar from "../NavBar/Navbar";
+import { formatarData } from '../Helpers';
 
 const CorpoListaLivre = (props) => {
   let semana = [];
@@ -87,7 +89,7 @@ class ListaDeHorariosLivre extends Component {
               idAgenda: this.props.location.state.idConsultorio,
               nomePaciente: "Livre",
               semana: {
-                diaDaSemana: this.state.DiaSemana,
+                diaDaSemana: formatarData(this.state.DiaSemana.replaceAll("-", "/")),
                 inicioExpediente: this.state.HoraEntrada,
                 fimExpediente: this.state.HoraSaida,
                 nomeEscritorio: "XXX",
@@ -107,7 +109,7 @@ class ListaDeHorariosLivre extends Component {
           idAgenda: this.props.location.state.idConsultorio,
           nomePaciente: "Livre",
           semana: {
-            diaDaSemana: this.state.DiaSemana,
+            diaDaSemana: formatarData(this.state.DiaSemana.replaceAll("-", "/")),
             inicioExpediente: this.state.HoraEntrada,
             fimExpediente: this.state.HoraSaida,
             nomeEscritorio: "XXX",
@@ -240,7 +242,7 @@ class ListaDeHorariosLivre extends Component {
                 <div className="col-6 agenda-meio mt-3">
                   <input
                     onChange={this.escutadorDeInput}
-                    type="text"
+                    type="date"
                     name="DiaSemana"
                     className="form-control"
                     placeholder="Dia da semana"
@@ -250,7 +252,7 @@ class ListaDeHorariosLivre extends Component {
                 <div className="col-3 agenda-meio mt-3">
                   <input
                     onChange={this.escutadorDeInput}
-                    type="text"
+                    type="time"
                     name="HoraEntrada"
                     className="form-control"
                     placeholder="Entrada"
@@ -260,7 +262,7 @@ class ListaDeHorariosLivre extends Component {
                 <div className="col-3 mt-3">
                   <input
                     onChange={this.escutadorDeInput}
-                    type="text"
+                    type="time"
                     name="HoraSaida"
                     className="form-control"
                     placeholder="Saida"

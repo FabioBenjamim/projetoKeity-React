@@ -151,3 +151,25 @@ button {
   background-color: cornflowerblue;
   border-radius: 5px;
 }
+
+.login-cadastro{
+    margin-left: 25%;
+}
+
+.table-ListaLocal{
+    border-color: #000;
+}
+
+.home-Medico{
+    height: 735px;
+    background-color: #C7EBFC;
+}
+
+.home-Paciente{
+    height: 680px;
+    background-color: #C7EBFC;
+}
+
+.home-Paciente-Color{
+    background-color: #C7EBFC !important;
+}

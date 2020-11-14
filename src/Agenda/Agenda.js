@@ -124,11 +124,21 @@ class Agenda extends Component {
       return (
         <Fragment>
           <Locais agendas={this.state.agendas} redirect={this.redirect} />
-          <Local
-            idMedico={this.props.idMedico}
-            escutadorDeInput={this.escutadorDeInput}
-            adicionar={this.adicionaNovoLocal}
-          />
+  
+            <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style={{marginLeft: "80%"}}>
+              Adicionar
+            </button>
+          
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+              <Local
+                idMedico={this.props.idMedico}
+                escutadorDeInput={this.escutadorDeInput}
+                adicionar={this.adicionaNovoLocal}
+              />
+            </div>
+          </div>
+
         </Fragment>
       );
   }

@@ -182,7 +182,7 @@ class ListaClinicaPaciente extends Component {
                   value={this.state.range}
                   min="0"
                   step="0.2"
-                  max="1000"
+                  max="100"
                   class="form-control-range"
                 ></input>
                 <label className="mt-1" for="formControlRange">
@@ -193,7 +193,7 @@ class ListaClinicaPaciente extends Component {
                   name="especialidade"
                   id="estado"
                 >
-                  <option value="ser protagonista">Todas</option>
+                  <option value="Dermatologista">Todas</option>
                   <option value="oftalmo">oftalmo</option>
                 </select>
                 <button onClick={this.buscaPorEspecialização}>Confirmar</button>

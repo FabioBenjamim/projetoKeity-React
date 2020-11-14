@@ -199,7 +199,6 @@ class ListaDeDiasLivres extends Component {
                 <thead>
                   <tr>
                     <th>Dia</th>
-                    <th scope="col">Status</th>
                   </tr>
                 </thead>
                 <CorpoListaLivre
