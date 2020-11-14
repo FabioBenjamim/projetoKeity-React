@@ -8,8 +8,10 @@ import Login from './Login';
 import LoginMedico from './LoginMedico';
 import HomeMedico from './HomeMedico';
 import HomePaciente from './HomePaciente';
-import ListaDeHorariosLivre from './ListaDeHorariosLivre'
+import ListaDeDiasLivres from './ListaDeDiasLivres'
+import ListaDeHorariosLivres from './ListaDeHorariosLivres'
 import ListaHorariosLivreMedico from './ListaHorariosLivreMedico'
+import ListaDeHorariosLivreMedicoZ from './ListaDeHorariosLivreMedicoZ'
 import ListaClinicaPaciente from './ListaClinicaPaciente';
 import Home from './Home';
 import NovaSenha from './NovaSenha'
@@ -29,7 +31,9 @@ ReactDOM.render(
       <Route path="/Agenda" exact={true} component={ListaHorariosLivreMedico} />
       <Route path="/HomeMedico" exact={true} component={HomeMedico} />
       <Route path="/HomePaciente" exact={true} component={HomePaciente} />
-      <Route path="/X" exact={true} component={ListaDeHorariosLivre} />
+      <Route path="/X" exact={true} component={ListaDeDiasLivres} />
+      <Route path="/y" exact={true} component={ListaDeHorariosLivres} />
+      <Route path="/z" exact={true} component={ListaDeHorariosLivreMedicoZ} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')

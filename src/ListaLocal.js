@@ -19,7 +19,7 @@ constructor(props){
   componentDidMount(){
     ApiService.lastLogin(this.props.location.state.idMedico)
     .then(res => res.json())
-    .then(res => this.setState( { data: res[res.length-1].data.substring(0,10).replaceAll("-", "/") } ))
+    .then(res => this.setState( { data: res[res.length-1].data.replaceAll("-", "/") } ))
   }
 
   render() {
@@ -77,6 +77,7 @@ constructor(props){
           </div>
         </div>
       </Fragment>
+      
 
     );
   }

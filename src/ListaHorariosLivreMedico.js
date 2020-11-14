@@ -5,21 +5,30 @@ import { Link, Redirect } from 'react-router-dom';
 import ApiService from './ApiService';
 import Navbar from './Navbar';
 
-const CorpoListaLivre = props => {
-    const horarios = props.livres.map((hora) => {
-        return (
-            <tr key={hora.horario}>
-                <td > {hora.horario} </td>
-                <td> {hora.nomePaciente} </td>
-            </tr>
-        );
-    })
+const CorpoListaLivre = props => { 
+    let semana = []
+        const horarios = props.livres.map((hora) => {
+            if(hora.idAgenda == props.idConsultorio){
+                    semana = hora.semana 
+            }
+        })
+        
+        const semanas = semana.map((diaDaSemana) =>{
+            return (
+                <tr key={diaDaSemana.idAgenda}>
+                    <td onClick={() => { props.redirect(diaDaSemana.idJornada) }} > {diaDaSemana.dia} </td>
+                </tr>
+            );
+        })
+    
+    
 
-    return (
-        <Fragment>
-            {horarios}
-        </Fragment>
-    );
+return (
+    <Fragment>
+        {semanas}
+    </Fragment>
+);
+    
 }
 
 
@@ -27,7 +36,9 @@ class ListaDeHorariosLivre extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            livre: []
+            livre: [],
+            semana: [],
+            agenda: false
         }
     }
 
@@ -40,7 +51,80 @@ class ListaDeHorariosLivre extends Component {
             })
     }
 
+    redirect = (idJornada) => {
+        this.setState({ idJornada: idJornada, redirect: true, path: '/y', id: this.props.location.state.idConsultorio, nome: this.props.location.state.nome, idPaciente: this.props.location.state.idPaciente })
+    }
+
+    verificaAgenda = (livres) => {
+        if (livres[0] == null) {
+            this.setState({ agenda: false })
+        }
+    }
+
+    escutadorDeInput = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        })
+    }
+
+    criaAgenda = () => {
+        this.verificaAgenda(this.state.livre)
+        if(this.state.agenda == false){
+        ApiService.criaAgenda(this.props.location.state.idConsultorio, this.props.location.state.idMedico)
+            .then(res => {
+                if (res.ok) {
+                    ApiService.ConfiguraAgendas(JSON.stringify({
+                        idAgenda: this.props.location.state.idConsultorio,
+                        nomePaciente: "Livre",
+                        semana: {
+                            diaDaSemana: this.state.DiaSemana,
+                            inicioExpediente: this.state.HoraEntrada,
+                            fimExpediente: this.state.HoraSaida,
+                            nomeEscritorio: "XXX"
+                        }
+                    }))
+                        .then(res => {
+                            if (res.ok) {
+                                window.location.reload()
+                            }
+                        })
+                }
+            })
+        } 
+        if(this.state.agenda == true){
+            ApiService.ConfiguraAgendas(JSON.stringify({
+                idAgenda: this.props.location.state.idConsultorio,
+                nomePaciente: "Livre",
+                semana: {
+                    diaDaSemana: this.state.DiaSemana,
+                    inicioExpediente: this.state.HoraEntrada,
+                    fimExpediente: this.state.HoraSaida,
+                    nomeEscritorio: "XXX"
+                }
+            }))
+                .then(res => {
+                    if (res.ok) {
+                        window.location.reload()
+                    }
+                })
+            }
+    }
+
     render() {
+        if (this.state.redirect) {
+            this.setState({ redirect: false })
+            return <Redirect to={{
+                pathname: '/z',
+                state: {
+                    nome: this.state.nome,
+                    idConsultorio: this.state.id,
+                    idPaciente: this.props.location.state.idPaciente,
+                    idJornada: this.state.idJornada
+                }
+
+            }} />
+        } else
         return (
             <Fragment>
                 <div className="">
@@ -96,13 +180,40 @@ class ListaDeHorariosLivre extends Component {
                         <table className="table agenda-meio fundo-lista">
                             <thead>
                                 <tr>
-                                    <th>Horario</th>
-                                    <th scope="col">Paciente</th>
+                                    <th>Dia</th>
                                 </tr>
                             </thead>
-                            <CorpoListaLivre livres={this.state.livre} />
-                            <button onClick={() => { console.log(this.state.livre) }} ></button>
+                            <CorpoListaLivre  redirect={ this.redirect }  idConsultorio={ this.props.location.state.idConsultorio }livres={this.state.livre} />
                         </table>
+                        <div className="row">
+                            <div className="col-6 agenda-meio mt-3">
+                                <input onChange={this.escutadorDeInput} type="text"
+                                    name="DiaSemana"
+                                    className="form-control"
+                                    placeholder="Dia da semana"
+                                    autoComplete="off"
+                                />
+                            </div>
+                            <div className="col-3 agenda-meio mt-3">
+                                <input onChange={this.escutadorDeInput} type="text"
+                                    name="HoraEntrada"
+                                    className="form-control"
+                                    placeholder="Entrada"
+                                    autoComplete="off"
+                                />
+                            </div>
+                            <div className="col-3 mt-3">
+                                <input onChange={this.escutadorDeInput} type="text"
+                                    name="HoraSaida"
+                                    className="form-control"
+                                    placeholder="Saida"
+                                    autoComplete="off"
+                                />
+                            </div>
+                            <div className="col-3 agenda-meio1 mt-3">
+                                <button type="button" onClick={this.criaAgenda} className="btn btn-primary mt-3">Adicionar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </Fragment>

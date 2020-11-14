@@ -81,7 +81,13 @@ const ApiService = {
       },
 
       HoraLivreMedico: (id) =>{
-        return fetch('http://localhost:8080/horarios/'+ `${id}`, {
+        return fetch('http://localhost:8080/agendas', {
+          method: 'GET',
+        })
+      },
+
+      HoraLivreMedico1: (id) =>{
+        return fetch('http://localhost:8080/horarios/'+ id, {
           method: 'GET',
         })
       },

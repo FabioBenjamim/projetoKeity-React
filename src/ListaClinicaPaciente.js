@@ -132,7 +132,7 @@ class ListaClinicaPaciente extends Component {
                         <div className="col-6">
                             <div className="rangeKm mt-5">
                                 <label for="formControlRange">distancia: {this.state.range} Km</label>
-                                <input name="range" onChange={this.escutadorDeInput} type="range" value={this.state.range} min="0" step="0.5" max="100" class="form-control-range" ></input>
+                                <input name="range" onChange={this.escutadorDeInput} type="range" value={this.state.range} min="0" step="0.2" max="1000" class="form-control-range" ></input>
                                 <label className="mt-1" for="formControlRange">Especialidade: </label>
                                 <select onClick={ this.escutadorDeInput } name="especialidade" id="estado">
                                     <option value="ser protagonista">Todas</option>

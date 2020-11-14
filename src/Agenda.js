@@ -59,6 +59,33 @@ class Agenda extends Component {
         .then(res => res.json())
         .then(res => { this.setState( { agendas: [...this.state.agendas, ...res.consultorios] } )  })
       }
+      
+      criaAgenda(){
+            ApiService.BuscaidAgenda(this.props.idMedico)
+            .then(response => response.text())
+            .then(result => {
+                var idConsultorio = JSON.parse(result).consultorios.length 
+                var idMedico = JSON.parse(result).idMedico
+                ApiService.criaAgenda(idConsultorio, idMedico)
+                .then(res =>{
+                    ApiService.ConfiguraAgendas(JSON.stringify({
+                        idAgenda: idConsultorio,
+                        nomePaciente: "Livre",
+                        semana: {
+                            diaDaSemana: this.state.DiaSemana,
+                            inicioExpediente: this.state.HoraEntrada,
+                            fimExpediente: this.state.HoraSaida,
+                            nomeEscritorio: "XXX"
+                        }
+                    }))
+                    .then(res =>{
+                        if(res.ok){
+                            console.log("Deu certo primo")
+                        }
+                    }) 
+                })
+        })
+      }
 
     redirect = (nome,idConsultorio) =>{ 
         this.setState( { redirect: true, path:'/Agenda', loca:nome, id:idConsultorio } )
@@ -69,10 +96,6 @@ class Agenda extends Component {
         this.setState({
             [name]: value
         })
-    }
-
-    adicionaNovoLocal = () =>{
-        
     }
 
     render() {

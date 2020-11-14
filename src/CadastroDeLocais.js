@@ -6,7 +6,7 @@ class Local extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            endereco:"",
+            endereco: "",
             numero: "",
             pontoReferencia: "",
             nomeConsultorio: "",
@@ -14,10 +14,10 @@ class Local extends Component {
         }
     }
 
-    cadastraConsultorio = body =>{
-       ApiService.criaConsultorio(JSON.stringify( {
+    cadastraConsultorio = body => {
+        ApiService.criaConsultorio(JSON.stringify({
             idMedico: this.props.idMedico,
-            consultorios:[
+            consultorios: [
                 {
                     endereco: this.state.endereco,
                     numero: this.state.numero,
@@ -27,37 +27,15 @@ class Local extends Component {
                     lng: this.state.lng
                 }
             ]
-        } ))
-        .then(res => {
-                ApiService.BuscaidAgenda(this.props.idMedico)
-                .then(response => response.text())
-                .then(result => {
-                    var idConsultorio = JSON.parse(result).consultorios.length 
-                    var idMedico = JSON.parse(result).idMedico
-                    ApiService.criaAgenda(idConsultorio, idMedico)
-                    .then(res =>{
-                        ApiService.ConfiguraAgendas(JSON.stringify({
-                            idAgenda: idConsultorio,
-                            nomePaciente: "Livre",
-                            semana: {
-                                diaDaSemana: this.state.DiaSemana,
-                                inicioExpediente: this.state.HoraEntrada,
-                                fimExpediente: this.state.HoraSaida,
-                                nomeEscritorio: "XXX"
-                            }
-                        }))
-                        .then(res =>{
-                            if(res.ok){
-                                console.log("Deu certo primo")
-                            }
-                        }) 
-                    })
-                 
+        }))
+            .then(res => {
+                if (res.ok) {
+                    window.location.reload()
+                }
             })
-        })
-      }
+    }
 
-      escutadorDeInput = event => {
+    escutadorDeInput = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -66,7 +44,7 @@ class Local extends Component {
 
     render() {
         return (
-                <Fragment>
+            <Fragment>
                 <div className="row mt-5">
                     <div className="col-6">
                         <input onChange={this.escutadorDeInput} type="text"
@@ -100,30 +78,7 @@ class Local extends Component {
                             autoComplete="off"
                         />
                     </div>
-                    <div className="col-6 mt-3">
-                        <input onChange={this.escutadorDeInput} type="text"
-                            name="DiaSemana"
-                            className="form-control"
-                            placeholder="Dia da semana"
-                            autoComplete="off"
-                        />
-                    </div>
-                    <div className="col-3 mt-3">
-                        <input onChange={this.escutadorDeInput} type="text"
-                            name="HoraEntrada"
-                            className="form-control"
-                            placeholder="Entrada"
-                            autoComplete="off"
-                        />
-                        </div>
-                        <div className="col-3 mt-3">
-                        <input onChange={this.escutadorDeInput} type="text"
-                            name="HoraSaida"
-                            className="form-control"
-                            placeholder="Saida"
-                            autoComplete="off"
-                        />
-                    </div>
+
                     <div className="col-3 mt-3">
                         <input onChange={this.escutadorDeInput} type="text"
                             name="lat"
@@ -139,6 +94,12 @@ class Local extends Component {
                             placeholder="longitude"
                             autoComplete="off"
                         />
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-date-input" class="col-2 col-form-label">Date</label>
+                        <div class="col-10">
+                            <input class="form-control" type="date" min="09:00" max="18:00"></input>
+                        </div>
                     </div>
                 </div>
                 <button type="button" onClick={this.cadastraConsultorio} className="btn btn-primary mt-3">Adicionar</button>
