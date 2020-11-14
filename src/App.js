@@ -53,18 +53,21 @@ class App extends Component {
 
   render() {
     return (
-      <Fragment>
-        <Navbar />
-        <div className="App ml-3 mt-3">
-          <header className="App-header"></header>
-          <form>
-            <fieldset>
+      <div className="CadastroMedico ml-3 mt-3">
+        <form>
+          <div class="CadastroPaciente">
+            <img
+              src="https://moldura-pop.s3.sa-east-1.amazonaws.com/imagens-proprietarias/99929074-co69H2-T4UCjdMLNVuRfvKVPmrNOjdKj-cropped-1x1-browser.png"
+              class="img"
+            ></img>
+            <fieldset class="formMedico">
               <fieldset class="grupo">
                 <div class="campo">
                   <label for="nome">Nome</label>
                   <input
                     type="text"
                     id="snome"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="nome"
                     style={{ width: "10em" }}
@@ -75,6 +78,7 @@ class App extends Component {
                   <input
                     type="text"
                     id="sobrenome"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="sobrenome"
                     style={{ width: "10em" }}
@@ -88,6 +92,7 @@ class App extends Component {
                   <input
                     type="text"
                     id="rg"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="rg"
                     style={{ width: "10em" }}
@@ -99,6 +104,7 @@ class App extends Component {
                   <input
                     type="text"
                     id="cpf"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="cpf"
                     style={{ width: "10em" }}
@@ -136,6 +142,7 @@ class App extends Component {
                   <input
                     type="text"
                     id="email"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="email"
                     style={{ width: "21.5em" }}
@@ -149,6 +156,7 @@ class App extends Component {
                   <input
                     type="text"
                     id="telefone"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="telefone"
                     style={{ width: "10em" }}
@@ -162,6 +170,7 @@ class App extends Component {
                   <input
                     type="text"
                     id="cep"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="cep"
                     style={{ width: "5em" }}
@@ -173,6 +182,7 @@ class App extends Component {
                   <input
                     type="text"
                     id="rua"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="rua"
                     style={{ width: "10em" }}
@@ -184,6 +194,7 @@ class App extends Component {
                   <input
                     type="text"
                     id="numero"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="numero"
                     style={{ width: "3em" }}
@@ -197,6 +208,7 @@ class App extends Component {
                   <input
                     type="text"
                     id="complemento"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="complemento"
                     style={{ width: "21.5em" }}
@@ -210,6 +222,7 @@ class App extends Component {
                   <input
                     type="text"
                     id="cidade"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="cidade"
                     style={{ width: "17em" }}
@@ -228,10 +241,22 @@ class App extends Component {
                 </div>
               </fieldset>
             </fieldset>
-          </form>
-          <button onClick={this.cadastraPaciente}>Enviar </button>
-        </div>
-      </Fragment>
+            <button
+              type="button"
+              class="btn btn-light"
+              id="buttonLogin"
+              onClick={this.cadastraPaciente}
+            >
+              Enviar
+            </button>
+          </div>
+        </form>
+        <style>
+          {
+            "body { background-image: url(https://ababas.com.br/wp-content/uploads/2019/08/2-dialab-bg.jpg); }"
+          }
+        </style>
+      </div>
     );
   }
 }

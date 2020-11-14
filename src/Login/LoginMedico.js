@@ -51,38 +51,51 @@ class LoginMedico extends Component {
       );
     } else
       return (
-        <div class="entrar">
-          <div class="login">
-            <div class="campo">
-              <label for="usuario">CPF</label>
-              <input
-                type="text"
-                onChange={this.escutadorDeInput}
-                id="usuario"
-                name="cpf"
-                style={{ width: "10em" }}
-              />
-            </div>
+        <div class="center-div">
+          <img
+            src="https://moldura-pop.s3.sa-east-1.amazonaws.com/imagens-proprietarias/99929074-co69H2-T4UCjdMLNVuRfvKVPmrNOjdKj-cropped-1x1-browser.png"
+            class="img"
+          ></img>
+          <h2 class="login-h2">Login</h2>
 
-            <div class="campo">
-              <label for="senha">Senha</label>
-              <input
-                type="text"
-                onChange={this.escutadorDeInput}
-                id="senha"
-                name="senha"
-                style={{ width: "10em" }}
-              />
-            </div>
-
-            <button class="botao" onClick={this.Login} name="botao">
-              Enviar
+          <input
+            class="form-control"
+            type="text"
+            id="input"
+            placeholder="CPF"
+            onChange={this.escutadorDeInput}
+            name="cpf"
+          ></input>
+          <input
+            class="form-control"
+            id="input2"
+            type="text"
+            placeholder="CRI"
+            onChange={this.escutadorDeInput}
+            name="senha"
+          ></input>
+          <button
+            type="button"
+            class="btn btn-light"
+            id="buttonLogin"
+            onClick={this.Login}
+          >
+            Login
+          </button>
+          <a href="http://localhost:3000/CadastroMedico">
+            <button type="button" class="btn btn-light" id="buttonEsqueciSenha">
+              Cadastra
             </button>
+          </a>
+          <button type="button" class="btn btn-light" id="buttonEsqueciSenha">
+            Esqueci Senha
+          </button>
 
-            <p>
-              Esqueceu sua senha? <a href="#">Clique aqui</a>
-            </p>
-          </div>
+          <style>
+            {
+              "body { background-image: url(https://ababas.com.br/wp-content/uploads/2019/08/2-dialab-bg.jpg); }"
+            }
+          </style>
         </div>
       );
   }

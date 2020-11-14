@@ -55,8 +55,8 @@ label.checkbox {
 .entrar {
   margin-top: 100px;
   margin-left: 40%;
-  width: 350px;
-  height: 350px;
+  width: 500px;
+  height: 500px;
   border: solid;
   border-radius: 10px;
   border-color: tan;
@@ -64,4 +64,95 @@ label.checkbox {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.Painel {
+  width: 800px;
+  height: 10px;
+}
+
+.center-div {
+  margin: 0 auto;
+  margin-top: 300px;
+  margin-bottom: 200px;
+  max-width: 500px;
+  height: 650px;
+  background-color: cornflowerblue;
+  border-radius: 5px;
+}
+
+.img {
+  width: 100px;
+  max-width: 100%;
+  height: auto;
+  display: table;
+  margin: 0 auto;
+  padding-top: 60px;
+
+  border-radius: 20%;
+}
+
+.login-h2 {
+  width: 400px;
+  max-width: 100%;
+  height: auto;
+  display: table;
+  margin: 0 auto;
+  margin-top: 50px;
+  text-align: center;
+  color: white;
+}
+
+#input[type="text"] {
+  width: 300px;
+  max-width: 100%;
+  height: auto;
+  display: table;
+  margin: 0 auto;
+  border: none;
+  background-color: cornflowerblue;
+  padding: 0px;
+  border-bottom: 2px solid white;
+  margin-top: 60px;
+}
+
+#input2[type="text"] {
+  width: 300px;
+  max-width: 100%;
+  height: auto;
+  display: table;
+  margin: 0 auto;
+  border: none;
+  background-color: cornflowerblue;
+  padding: 0px;
+  border-bottom: 2px solid white;
+  margin-top: 50px;
+}
+
+#buttonLogin {
+  width: 150px;
+  height: 40px;
+  max-width: 100%;
+  display: table;
+  margin: 0 auto;
+  border: none;
+  color: cornflowerblue;
+  background-color: white;
+
+  margin-top: 40px;
+  border-radius: 30px;
+}
+
+#buttonEsqueciSenha {
+  width: 150px;
+  height: 40px;
+  max-width: 100%;
+  display: table;
+  margin: 0 auto;
+  border: none;
+  color: cornflowerblue;
+  background-color: white;
+
+  margin-top: 20px;
+  border-radius: 30px;
 }

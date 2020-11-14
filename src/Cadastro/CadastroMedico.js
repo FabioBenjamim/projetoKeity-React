@@ -58,18 +58,21 @@ class CadastroMedico extends Component {
 
   render() {
     return (
-      <Fragment>
-        <Navbar />
-        <div className="CadastroMedico ml-3 mt-3">
-          <header className="App-header"></header>
-          <form>
-            <fieldset>
+      <div className="CadastroMedico ml-3 mt-3">
+        <form>
+          <div class="center-divS">
+            <img
+              src="https://moldura-pop.s3.sa-east-1.amazonaws.com/imagens-proprietarias/99929074-co69H2-T4UCjdMLNVuRfvKVPmrNOjdKj-cropped-1x1-browser.png"
+              class="img"
+            ></img>
+            <fieldset class="formMedico">
               <fieldset class="grupo">
                 <div class="campo">
                   <label for="nome">Nome</label>
                   <input
                     type="text"
                     id="nome"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="nome"
                     style={{ width: "10em" }}
@@ -81,6 +84,7 @@ class CadastroMedico extends Component {
                   <input
                     type="text"
                     id="sobrenome"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="sobrenome"
                     style={{ width: "10em" }}
@@ -94,6 +98,7 @@ class CadastroMedico extends Component {
                   <input
                     type="text"
                     id="cpf"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="cpf"
                     style={{ width: "10em" }}
@@ -128,6 +133,7 @@ class CadastroMedico extends Component {
                   <input
                     type="text"
                     id="cri"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="cri"
                     style={{ width: "10em" }}
@@ -138,6 +144,7 @@ class CadastroMedico extends Component {
                   <input
                     type="text"
                     id="cro"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="cro"
                     style={{ width: "10em" }}
@@ -151,6 +158,7 @@ class CadastroMedico extends Component {
                   <input
                     type="text"
                     id="especializacao"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="especializacao"
                     style={{ width: "21.5em" }}
@@ -164,6 +172,7 @@ class CadastroMedico extends Component {
                   <input
                     type="text"
                     id="email"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="email"
                     style={{ width: "21.5em" }}
@@ -177,6 +186,7 @@ class CadastroMedico extends Component {
                   <input
                     type="text"
                     id="telefone"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="telefone"
                     style={{ width: "10em" }}
@@ -190,6 +200,7 @@ class CadastroMedico extends Component {
                   <input
                     type="text"
                     id="cep"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="cep"
                     style={{ width: "5em" }}
@@ -201,6 +212,7 @@ class CadastroMedico extends Component {
                   <input
                     type="text"
                     id="endereco"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="endereco"
                     style={{ width: "10em" }}
@@ -212,6 +224,7 @@ class CadastroMedico extends Component {
                   <input
                     type="text"
                     id="numero"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="numero"
                     style={{ width: "3em" }}
@@ -225,6 +238,7 @@ class CadastroMedico extends Component {
                   <input
                     type="text"
                     id="complemento"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="complemento"
                     style={{ width: "21.5em" }}
@@ -238,6 +252,7 @@ class CadastroMedico extends Component {
                   <input
                     type="text"
                     id="cidade"
+                    class="form-control"
                     onChange={this.escutadorDeInput}
                     name="cidade"
                     style={{ width: "17em" }}
@@ -248,6 +263,7 @@ class CadastroMedico extends Component {
                   <select
                     onChange={this.escutadorDeInput}
                     name="estado"
+                    class="form-control"
                     id="estado"
                   >
                     <option value="">--</option>
@@ -257,10 +273,22 @@ class CadastroMedico extends Component {
               </fieldset>
               <fieldset class="grupo"></fieldset>
             </fieldset>
-          </form>
-          <button onClick={this.cadastraMedico}>Enviar </button>
-        </div>
-      </Fragment>
+            <button
+              type="button"
+              class="btn btn-light"
+              id="buttonLogin"
+              onClick={this.cadastraMedico}
+            >
+              Enviar
+            </button>
+          </div>
+          <style>
+            {
+              "body { background-image: url(https://ababas.com.br/wp-content/uploads/2019/08/2-dialab-bg.jpg); }"
+            }
+          </style>
+        </form>
+      </div>
     );
   }
 }
