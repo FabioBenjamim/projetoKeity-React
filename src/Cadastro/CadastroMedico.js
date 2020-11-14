@@ -1,25 +1,28 @@
 import React, { Component, Fragment } from "react";
-import "./App.css";
-import ApiService from "./Service/ApiService";
-import Navbar from "./NavBar/Navbar";
+import "./CadastroMedico.css";
+import ApiService from "../Service/ApiService";
+import Navbar from "../NavBar/Navbar";
 
-class App extends Component {
+class CadastroMedico extends Component {
   constructor(props) {
     super(props);
     this.state = {
       nome: "",
       sobrenome: "",
-      rg: "",
-      cpf: "",
       sexo: "",
       email: "",
       telefone: "",
       cep: "",
-      rua: "",
+      endereco: "",
       numero: "",
       complemento: "",
       cidade: "",
       estado: "",
+      rg: "",
+      cri: "",
+      cro: "",
+      especializacao: "",
+      cpf: "",
     };
   }
 
@@ -30,23 +33,25 @@ class App extends Component {
     });
   };
 
-  cadastraPaciente = () => {
-    ApiService.cadastraPaciente(
+  cadastraMedico = () => {
+    ApiService.cadastraMedico(
       JSON.stringify({
         nome: this.state.nome,
         sobrenome: this.state.sobrenome,
-        rg: this.state.rg,
-        cpf: this.state.cpf,
         sexo: this.state.sexo,
         email: this.state.email,
         telefone: this.state.telefone,
         cep: this.state.cep,
-        endereco: this.state.rua,
+        endereco: this.state.endereco,
         numero: this.state.numero,
         complemento: this.state.complemento,
         cidade: this.state.cidade,
         estado: this.state.estado,
-        senha: this.state.rg,
+        cri: this.state.cri,
+        cro: this.state.cro,
+        especializacao: this.state.especializacao,
+        cpf: this.state.cpf,
+        senha: this.state.cri,
       })
     );
   };
@@ -55,7 +60,7 @@ class App extends Component {
     return (
       <Fragment>
         <Navbar />
-        <div className="App ml-3 mt-3">
+        <div className="CadastroMedico ml-3 mt-3">
           <header className="App-header"></header>
           <form>
             <fieldset>
@@ -64,12 +69,13 @@ class App extends Component {
                   <label for="nome">Nome</label>
                   <input
                     type="text"
-                    id="snome"
+                    id="nome"
                     onChange={this.escutadorDeInput}
                     name="nome"
                     style={{ width: "10em" }}
                   />
                 </div>
+
                 <div class="campo">
                   <label for="sobrenome">Sobrenome</label>
                   <input
@@ -84,17 +90,6 @@ class App extends Component {
 
               <fieldset class="grupo">
                 <div class="campo">
-                  <label for="rg">RG</label>
-                  <input
-                    type="text"
-                    id="rg"
-                    onChange={this.escutadorDeInput}
-                    name="rg"
-                    style={{ width: "10em" }}
-                  />
-                </div>
-
-                <div class="campo">
                   <label for="cpf">CPF</label>
                   <input
                     type="text"
@@ -104,16 +99,14 @@ class App extends Component {
                     style={{ width: "10em" }}
                   />
                 </div>
-              </fieldset>
 
-              <fieldset class="grupo">
                 <div class="campo">
                   <label>Sexo</label>
                   <label>
                     <input
                       type="radio"
-                      onChange={this.escutadorDeInput}
                       name="sexo"
+                      onChange={this.escutadorDeInput}
                       value="masculino"
                     />{" "}
                     Masculino
@@ -121,12 +114,47 @@ class App extends Component {
                   <label>
                     <input
                       type="radio"
-                      onChange={this.escutadorDeInput}
                       name="sexo"
+                      onChange={this.escutadorDeInput}
                       value="feminino"
                     />{" "}
                     Feminino
                   </label>
+                </div>
+              </fieldset>
+              <fieldset class="grupo">
+                <div class="campo">
+                  <label for="cri">CRI</label>
+                  <input
+                    type="text"
+                    id="cri"
+                    onChange={this.escutadorDeInput}
+                    name="cri"
+                    style={{ width: "10em" }}
+                  />
+                </div>
+                <div class="campo">
+                  <label for="cro">CRO</label>
+                  <input
+                    type="text"
+                    id="cro"
+                    onChange={this.escutadorDeInput}
+                    name="cro"
+                    style={{ width: "10em" }}
+                  />
+                </div>
+              </fieldset>
+
+              <fieldset class="grupo">
+                <div class="campo">
+                  <label for="especializacao">Especialização</label>
+                  <input
+                    type="text"
+                    id="especializacao"
+                    onChange={this.escutadorDeInput}
+                    name="especializacao"
+                    style={{ width: "21.5em" }}
+                  />
                 </div>
               </fieldset>
 
@@ -169,12 +197,12 @@ class App extends Component {
                 </div>
 
                 <div class="campo">
-                  <label for="rua">Endereço</label>
+                  <label for="endereco">Endereço</label>
                   <input
                     type="text"
-                    id="rua"
+                    id="endereco"
                     onChange={this.escutadorDeInput}
-                    name="rua"
+                    name="endereco"
                     style={{ width: "10em" }}
                   />
                 </div>
@@ -223,17 +251,18 @@ class App extends Component {
                     id="estado"
                   >
                     <option value="">--</option>
-                    <option value="SP">SP</option>
+                    <option value="PR">SP</option>
                   </select>
                 </div>
               </fieldset>
+              <fieldset class="grupo"></fieldset>
             </fieldset>
           </form>
-          <button onClick={this.cadastraPaciente}>Enviar </button>
+          <button onClick={this.cadastraMedico}>Enviar </button>
         </div>
       </Fragment>
     );
   }
 }
 
-export default App;
+export default CadastroMedico;

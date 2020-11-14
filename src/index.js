@@ -1,30 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import CadastroMedico from './CadastroMedico';
-import Listalocais from './ListaLocal';
-import Login from './Login';
-import LoginMedico from './LoginMedico';
-import HomeMedico from './HomeMedico';
-import HomePaciente from './HomePaciente';
-import ListaDeDiasLivres from './ListaDeDiasLivres'
-import ListaDeHorariosLivres from './ListaDeHorariosLivres'
-import ListaHorariosLivreMedico from './ListaHorariosLivreMedico'
-import ListaDeHorariosLivreMedicoZ from './ListaDeHorariosLivreMedicoZ'
-import ListaClinicaPaciente from './ListaClinicaPaciente';
-import Home from './Home';
-import NovaSenha from './NovaSenha'
-import * as serviceWorker from './serviceWorker';
+import CadastroMedico from "./Cadastro/CadastroMedico";
+import Listalocais from "./Lista/ListaLocal";
+import Login from "./Login/Login";
+import LoginMedico from "./Login/LoginMedico";
+import HomeMedico from "./Home/HomeMedico";
+import HomePaciente from "./Home/HomePaciente";
+import ListaDeDiasLivres from "./Lista/ListaDeDiasLivres";
+import ListaDeHorariosLivres from "./Lista/ListaDeHorariosLivres";
+import ListaHorariosLivreMedico from "./Lista/ListaHorariosLivreMedico";
+import ListaDeHorariosLivreMedicoZ from "./Lista/ListaDeHorariosLivreMedicoZ";
+import ListaClinicaPaciente from "./Lista/ListaClinicaPaciente";
+import Home from "./Home/Home";
+import NovaSenha from "./NovaSenha/NovaSenha";
+import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-    <Route path="/" exact={true} component={Home} />
-    <Route path="/Login" exact={true} component={Login} />
-    <Route path="/LoginMedico" exact={true} component={LoginMedico} />
-    <Route path="/TrocaSenha" exact={true} component={NovaSenha} />
-    <Route path="/ClinicasP" exact={true} component={ListaClinicaPaciente} />
+      <Route path="/" exact={true} component={Home} />
+      <Route path="/Login" exact={true} component={Login} />
+      <Route path="/LoginMedico" exact={true} component={LoginMedico} />
+      <Route path="/TrocaSenha" exact={true} component={NovaSenha} />
+      <Route path="/ClinicasP" exact={true} component={ListaClinicaPaciente} />
       <Route path="/CadastroPaciente" exact={true} component={App} />
       <Route path="/CadastroMedico" exact={true} component={CadastroMedico} />
       <Route path="/Listalocais" exact={true} component={Listalocais} />
@@ -36,7 +36,7 @@ ReactDOM.render(
       <Route path="/z" exact={true} component={ListaDeHorariosLivreMedicoZ} />
     </Switch>
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
