@@ -11,7 +11,7 @@ const CorpoListaLivre = (props) => {
       <tr key={hora.horario}>
         <td
           onClick={() => {
-            ApiService.EscolheHorario(hora.idHorario, props.nome, 1);
+            ApiService.EscolheHorario(hora.idHorario, props.nome, props.idPaciente);
           }}
         >
           {" "}

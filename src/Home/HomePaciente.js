@@ -8,10 +8,13 @@ import ApiService from "../Service/ApiService";
 
 const CorpoListaLivre = (props) => {
   const horarios = props.livres.map((hora) => {
+    console.log(hora)
     return (
       <tr key={hora.horario}>
         <td> {hora.horario} </td>
         <td> {hora.jornada.dia} </td>
+        <td> {hora.consultaRealizada} </td>
+        <td><button className="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" >Avaliar</button></td>
       </tr>
     );
   });
@@ -25,8 +28,17 @@ class HomePaciente extends Component {
     this.state = {
       consultas: [],
       retorno: [],
+      texto: "Muito Ruim",
+      range: 0
     };
   }
+
+  escutadorDeInput = (event) => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value,
+    });
+  };
 
   componentDidMount() {
     ApiService.pegaConsultas(this.props.location.state.idPaciente)
@@ -124,6 +136,7 @@ class HomePaciente extends Component {
                           <tr>
                             <th>Horario</th>
                             <th>Dia</th>
+                            <th >Status Consulta</th>
                           </tr>
                         </thead>
                         <CorpoListaLivre livres={this.state.consultas} />
@@ -152,6 +165,38 @@ class HomePaciente extends Component {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabIndex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="staticBackdropLabel">Avalie o Medico</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+              <label for="formControlRange">
+                 Avalie o Doutore<br></br>
+                 {this.state.range}
+                </label>
+              <input
+                  name="range"
+                  onChange={this.escutadorDeInput}
+                  type="range"
+                  value={this.state.range}
+                  min="0"
+                  step="1"
+                  max="5"
+                  class="form-control-range"
+                ></input>
+
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-primary" >Salvar</button>
               </div>
             </div>
           </div>

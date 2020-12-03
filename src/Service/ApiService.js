@@ -7,6 +7,15 @@ const ApiService = {
     });
   },
 
+  pegaPaciente: (idPaciente) =>{
+    var formData = new FormData();
+    formData.append("idPaciente", idPaciente);
+    return fetch("http://localhost:8080/pacientes/paciente",{
+      method: "POST",
+      body: formData
+    })
+  },
+
   cadastraMedico: (body) => {
     return fetch("http://localhost:8080/medicos", {
       method: "POST",
@@ -47,6 +56,19 @@ const ApiService = {
         method: "PUT",
       }
     );
+  },
+
+  avaliaPaciente: (body) =>{
+    return fetch('http://localhost:8080/pacientes/trocaSenha/', {
+    method: "PUT",
+    headers: { "content-type": "application/json" },
+    body: body
+    })
+    .then(res =>{
+      if(res.ok){
+        window.location.reload()
+      }
+    })
   },
 
   lastLogin: (id) => {
@@ -139,6 +161,28 @@ const ApiService = {
     };
     return fetch("http://localhost:8080/medicos/medico", requestOptions);
   },
+
+  AlterarStatus:(idHorario,nomePaciente,idPaciente,consultaStatus) => {
+    return fetch(
+      "http://localhost:8080/horarios/consultaRealizada/" +
+        `${idHorario}` +
+        "/" +
+        `${nomePaciente}` +
+        "/" +
+        `${idPaciente}` +
+        "/" +
+        `${consultaStatus}`,
+      {
+        method: "PUT",
+      }
+    )
+    .then(res =>{
+      if(res.ok){
+        window.location.reload()
+      }
+    })
+  },
+
   criaConsultorio: (body) => {
     return fetch("http://localhost:8080/medicos/consultorios ", {
       method: "PUT",
