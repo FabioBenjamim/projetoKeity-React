@@ -13,6 +13,7 @@ const CorpoListaLivre = (props) => {
     if (hora.idAgenda == props.idConsultorio) {
       semana = hora.semana;
     }
+    console.log(hora)
   });
 
   const semanas = semana.map((diaDaSemana) => {
@@ -88,6 +89,7 @@ class ListaDeHorariosLivre extends Component {
             JSON.stringify({
               idAgenda: this.props.location.state.idConsultorio,
               nomePaciente: "Livre",
+              idMedico: this.props.location.state.idMedico,
               semana: {
                 diaDaSemana: formatarData(this.state.DiaSemana.replaceAll("-", "/")),
                 inicioExpediente: this.state.HoraEntrada,
@@ -108,6 +110,7 @@ class ListaDeHorariosLivre extends Component {
         JSON.stringify({
           idAgenda: this.props.location.state.idConsultorio,
           nomePaciente: "Livre",
+          idMedico: this.props.location.state.idMedico,
           semana: {
             diaDaSemana: formatarData(this.state.DiaSemana.replaceAll("-", "/")),
             inicioExpediente: this.state.HoraEntrada,

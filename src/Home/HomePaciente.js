@@ -9,14 +9,25 @@ import ApiService from "../Service/ApiService";
 const CorpoListaLivre = (props) => {
   const horarios = props.livres.map((hora) => {
     console.log(hora)
-    return (
+    if(hora.consultaRealizada != null){
+      return (
       <tr key={hora.horario}>
         <td> {hora.horario} </td>
         <td> {hora.jornada.dia} </td>
-        <td> {hora.consultaRealizada} </td>
-        <td><button className="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" >Avaliar</button></td>
+        <td data-toggle="modal" data-target="#staticBackdrop1" onClick={ () =>{ props.montaModalMedico(hora.idMedico) } }> {hora.consultaRealizada} </td>
+        <td><button className="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" onClick={ () =>{ props.montaModal(hora.idMedico) } } >Avaliar</button></td>
       </tr>
     );
+    }else{
+      return (
+        <tr key={hora.horario}>
+          <td> {hora.horario} </td>
+          <td> {hora.jornada.dia} </td>
+          <td data-toggle="modal" data-target="#staticBackdrop1" onClick={ () =>{ props.montaModalMedico(hora.idMedico) } }> Em Aberto </td>
+          
+        </tr>
+      );
+    }
   });
 
   return <Fragment>{horarios}</Fragment>;
@@ -28,7 +39,6 @@ class HomePaciente extends Component {
     this.state = {
       consultas: [],
       retorno: [],
-      texto: "Muito Ruim",
       range: 0
     };
   }
@@ -48,6 +58,26 @@ class HomePaciente extends Component {
         this.setState({ consultas: [...this.state.consultas, ...lista] });
         console.log(this.state);
       });
+  }
+
+  montaModal = (idMedico) => {
+    this.setState({Medico: idMedico})
+  }
+
+  montaModalMedico = (idMedico) =>{
+    var pontos = []
+        var soma = 0 
+    ApiService.buscaMedico(idMedico)
+     .then(res =>res.json())
+     .then(res =>{ 
+       if(res.avaliacao != null){
+      Array.from(res.avaliacao).reverse().forEach(function (y) {
+        pontos.push(y)
+        soma = y + soma
+      })
+    }
+    this.setState( { media: soma/pontos.length, nome:res.nome, espcialidade: res.especializacao } )
+     })
   }
 
   render() {
@@ -139,7 +169,7 @@ class HomePaciente extends Component {
                             <th >Status Consulta</th>
                           </tr>
                         </thead>
-                        <CorpoListaLivre livres={this.state.consultas} />
+                        <CorpoListaLivre livres={this.state.consultas} montaModal={this.montaModal} montaModalMedico={ this.montaModalMedico }/>
                       </table>
                     </div>
                   </div>
@@ -196,7 +226,27 @@ class HomePaciente extends Component {
 
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-primary" >Salvar</button>
+                <button type="button" className="btn btn-primary" onClick={ () =>{ ApiService.avaliaMedico(JSON.stringify({ idMedico: this.state.Medico, avaliacao: [this.state.range] })) } }  >Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="modal fade" id="staticBackdrop1" data-backdrop="static" data-keyboard="false" tabIndex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="staticBackdropLabel">Dados do Medico</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  Nome: { this.state.nome}<br></br>
+                  Avaliação do Medico: {this.state.media}<br></br>
+                  Especialidade: { this.state.espcialidade }
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={ () =>{ ApiService.avaliaMedico(JSON.stringify({ idMedico: this.state.Medico, avaliacao: [this.state.range] })) } }  >Fechar</button>
               </div>
             </div>
           </div>

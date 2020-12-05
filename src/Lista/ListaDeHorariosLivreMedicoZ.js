@@ -3,22 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Redirect, Link } from "react-router-dom";
 import "../App.css";
 import ApiService from "../Service/ApiService";
-import Navbar from "../NavBar/Navbar";
+
 
 const CorpoListaLivre = (props) => {
   const horarios = props.livres.map((hora) => {
-     var pontos = []
-      var soma = 0
-     ApiService.pegaPaciente(hora.idPaciente)
-     .then(res =>res.json())
-     .then(res =>{
-       if(res.avaliacao != null){
-      Array.from(res.avaliacao).reverse().forEach(function (y) {
-        pontos.push(y)
-        soma = y + soma
-      })
-    }
-     })
+
     if (hora.consultaRealizada == null) {
       return (
         <tr key={hora.horario}>
@@ -27,7 +16,6 @@ const CorpoListaLivre = (props) => {
           <td> {hora.nomePaciente} </td>
           <td> Aberta </td>
           <td><button className="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" onClick={() => { props.montaModal(hora.idHorario, hora.nomePaciente, hora.idPaciente) }}>Alterar status</button></td>
-          
         </tr>
       );
     } else {
@@ -35,7 +23,7 @@ const CorpoListaLivre = (props) => {
         <tr key={hora.horario}>
           <td> {hora.horario} </td>
           <td> {hora.status} </td>
-          <td> {hora.nomePaciente} </td>
+          <td data-toggle="modal" data-target="#staticBackdrop2" onClick={ () =>{props.montaModalPaciente(hora.idPaciente,hora.nomePaciente)}} > {hora.nomePaciente} </td>
           <td> {hora.consultaRealizada} </td>
           <td><button className="btn btn-primary">Alterar status</button></td>
           <td><button className="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop1" onClick={() => { props.montaModal(hora.idHorario, hora.nomePaciente, hora.idPaciente) }}>Avaliar Paciente</button></td>
@@ -69,6 +57,23 @@ class ListaDeHorariosLivreMedicoZ extends Component {
 
   montaModal = (idHorario, nomePaciente, idPaciente) => {
     this.setState({Horario: idHorario, nome: nomePaciente, idPaciente: idPaciente })
+  }
+
+  montaModalPaciente = (idPaciente,nomePaciente) =>{
+    var pontos = []
+        var soma = 0 
+    ApiService.pegaPaciente(idPaciente)
+     .then(res =>res.json())
+     .then(res =>{ 
+       if(res.avaliacao != null){
+      Array.from(res.avaliacao).reverse().forEach(function (y) {
+        pontos.push(y)
+        soma = y + soma
+      })
+    }
+    this.setState( { media: soma/pontos.length, nome: nomePaciente,telefone: res.telefone } )
+     })
+     
   }
 
   componentDidMount() {
@@ -180,7 +185,8 @@ class ListaDeHorariosLivreMedicoZ extends Component {
                 idConsultorio={this.props.location.state.idConsultorio}
                 idPaciente={this.props.location.state.idPaciente}
                 montaModal={this.montaModal}
-                media={ this.media}
+                arroz = {this.arroz}
+                montaModalPaciente={ this.montaModalPaciente }
               />
             </table>
           </div>
@@ -237,6 +243,26 @@ class ListaDeHorariosLivreMedicoZ extends Component {
               </div>
               <div className="modal-footer">
                 <button type="button" onClick={ () =>{ApiService.avaliaPaciente(JSON.stringify({ idPaciente: this.state.idPaciente, avaliacao: [this.state.range] })) }} className="btn btn-primary" >Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="modal fade" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabIndex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="staticBackdropLabel">Dados do paciente</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Nome:{this.state.nome}<br></br>
+                Media de avaliações:{this.state.media}<br></br>
+                Telefone: {this.state.telefone}
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-primary" data-dismiss="modal">Fechar</button>
               </div>
             </div>
           </div>

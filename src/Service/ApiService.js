@@ -58,6 +58,19 @@ const ApiService = {
     );
   },
 
+  avaliaMedico: (body) =>{
+    return fetch('http://localhost:8080/medicos/trocaSenha/', {
+    method: "PUT",
+    headers: { "content-type": "application/json" },
+    body: body
+    })
+    .then(res =>{
+      if(res.ok){
+        window.location.reload()
+      }
+    })
+  },
+
   avaliaPaciente: (body) =>{
     return fetch('http://localhost:8080/pacientes/trocaSenha/', {
     method: "PUT",
